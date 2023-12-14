@@ -1,0 +1,39 @@
+\formdesc{Methode directe}
+
+\formtitle{Elimination de Gauss}
+
+\begin{enumerate}
+    \item Transformer la matrice $A$ en forme echelonnee.
+    \item Substituer les valeurs trouvees dans les equations.
+\end{enumerate}
+
+\formtitle{Factorisation LU}
+
+\begin{enumerate}
+    \item Transformer la matrice $A$ en forme echelonnee. $ A = LU $
+    \item Substituer en avant $ L\vec{y} = \vec{b} $. avec L la matrice triangulaire inferieure.
+    \item Substituer en arriere $ U\vec{x} = \vec{y} $. avec U la matrice triangulaire superieure.
+\end{enumerate}
+
+voir slide 9.
+
+\formtitle{méthode de Doolittle}
+
+$$u_{km} = a_{km} - \sum_{j=1}^{k-1} l_{kj}u_{jm} \quad m = k, k+1, \dots, n $$
+
+$$l_{ik} = \frac{1}{u_{kk}} \left( a_{ik} - \sum_{j=1}^{k-1} l_{ij}u_{jk} \right) \quad m = k+1, k+2, \dots, n$$
+
+\formtitle{Besoin de pivotement}
+
+Elim. de Gauss/LU sans pivotement peut echouer si $a_{kk} = 0$.
+
+Permuter les lignes de $A$ pour avoir $a_{kk} \neq 0$.
+Mettre le plus grand element en valeur absolue en haut.
+
+$$LU= PA$$
+
+P est une matrice de permutation.
+
+Initialiser $P$ comme la matrice identite I.
+
+Si $A$ subit une permutation, $P$ doit subir la meme permutation.

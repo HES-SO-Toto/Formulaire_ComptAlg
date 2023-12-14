@@ -1,0 +1,132 @@
+
+\formdesc{Polynôme d'interpolation : }
+
+\formtitle{Forme de lagrange  :} 
+
+\noindent{\hfill$ P_n(x) = \sum_{i=0}^{n} y_i l_i(x) $ \hfill} 
+\noindent{\hfill$ l_i = \prod_{j=0,j \neq i}^{n} \cfrac{x -x_j}{x -x_i}  $ \hfill} 
+
+\noindent{\hfill$ L(x) = \prod_{i=0}^{n} (x -x_i) $ \hfill} 
+\noindent{\hfill$ \lambda_i^{-1} = \prod_{j=0,j \neq i}^{n} (x_i - x_j) $ \hfill} 
+
+\formtitle{Evaluation :} 
+
+\noindent{ \hfill$P_n =  L(x) \sum_{i=0}^{n} \cfrac{\lambda_i}{x-x_i} y_i $ \hfill} 
+
+\formtitle{Formule barycentrique :} 
+
+\noindent{ \hfill$P_n =  \cfrac{\sum_{i=0}^{n} \cfrac{\lambda_i}{x-x_i} y_i }{\sum_{i=0}^{n} \cfrac{\lambda_i}{x-x_i}}$ \hfill} 
+
+\formtitle{forme de Newton :} 
+
+\noindent{ \hfill$P_n(x) = c_0 + c_n \prod_{i=0}^{n-1}(x - x_i) $ \hfill}
+
+\noindent{ \hfill$f[x_0] = y_0 = c_0$ \hfill}
+\noindent{ \hfill$f[x_n] = y_n$ \hfill}
+
+\noindent{ \hfill$f[x_0,x_1] = \cfrac{y_1 - y_0}{x_1 - x_0}$ \hfill}
+
+\noindent{ \hfill$f[x_0,x_1,x_2] = \cfrac{f[x_1,x_2] - f[x_0,x_1]}{x_2 - x_0}$ \hfill}
+
+\noindent{ \hfill$f[x_0,x_1,...,x_n] = \cfrac{f[x_1,x_2,...,x_n] - f[x_0,x_1,...,x_{n-1}]}{x_n - x_0}$ \hfill}
+
+\formtitle{Schéma de newtown:} 
+
+
+\begin{tikzpicture}
+    % Nodes
+    \node (x0) at (0,0) {$x_0$};
+    \node[right=0.5cm of x0] (f_x0) {$f[x_0]$};
+  
+    \node[below=0.5cm of x0] (x1) {$x_1$};
+    \node[right=0.5cm of x1] (f_x1) {$f[x_1]$};
+    \node[below right=-.1cm and 1cm of f_x0] (f_x0_x1) {$f[x_0, x_1]$};
+
+    \node[below=.5cm of x1] (x2) {$x_2$};
+    \node[right=0.5cm of x2] (f_x2) {$f[x_2]$};
+    \node[below=.5cm of f_x0_x1] (f_x1_x2) {$f[x_1, x_2]$};
+    \node[below right=-.1cm and 1cm of f_x0_x1] (f_x0_x1_x2) {$f[x_0, x_1, x_2]$};
+   
+
+    \draw (x0.east) ++(0.25,0.25) -- ++(0,-2.5);
+
+    % Arrows
+    \draw[->,>=Stealth] (f_x0) -- node[above] {-} (f_x0_x1);
+    \draw[->,>=Stealth] (f_x1) -- node[below] {+} (f_x0_x1);
+    \draw[->,>=Stealth] (f_x1) -- node[below] {-} (f_x1_x2);
+    \draw[->,>=Stealth] (f_x2) -- node[below] {+} (f_x1_x2);
+
+    \draw[->,>=Stealth] (f_x0_x1) -- node[above] {-} (f_x0_x1_x2);
+    \draw[->,>=Stealth] (f_x1_x2) -- node[below] {+} (f_x0_x1_x2);
+
+  \end{tikzpicture}
+
+
+
+
+\formtitle{Erreur d'interpolation :} 
+
+\noindent{ \hfill$ \left\lvert f(x) - P_n(x) \right\rvert \leq \cfrac{M_{n+1}}{(n+1)!} \left\lvert \prod_{i=0}^{n}(x-x_i) \right\rvert $ \hfill}
+
+\noindent{ \hfill$ M_{n+1} := max_{\xi \in [a,b]} \left\lvert f^{(n+1)}(\xi)\right\rvert  $ \hfill}
+
+\hformbar
+
+\formdesc{Splines : }
+
+\formtitle{Calcul d’une spline cubique :} 
+
+\noindent{ \hfill$S_i(x) = a_i(x-x_i)^3 + b_i(x-x_i)^2 + c_i(x-x_i) + d_i$ \hfill}
+
+\noindent{ \hfill$a_i = \cfrac{1}{6h}(y''_{i+1} - y''_i)$ \hfill}
+\noindent{ \hfill$b_i = \cfrac{1}{2}(y''_i)$ \hfill}
+
+
+\noindent{ \hfill$c_i = \cfrac{y_{i+1} - y_i}{h} - \cfrac{h}{6}(y''_{i+1} + 2y''_i)$ \hfill}
+\noindent{ \hfill$d_i = y_i$ \hfill}
+
+\formtitle{Calcul des dérivées secondes :}
+
+\noindent{ \hfill$y''_{i-1} + 4y''_i + y''_{i+1} = \cfrac{6}{h^2}(y_{i+1} - 2y_i + y_{i-1})$ \hfill}
+
+avec $i = 1, ..., n-1$
+
+\formtitle{Matrice tridiagonale :}
+
+\[
+\begin{bmatrix}
+4 & 1 & 0 & 0 \\
+1 & 4 & 1 & 0 \\
+0 & 1 & 4 & 1 \\
+0 & 0 & 1 & 4 \\
+\end{bmatrix}
+\begin{bmatrix}
+y''_1 \\
+y''_2 \\
+y''_3 \\
+y''_4 \\
+\end{bmatrix}
+=
+\cfrac{6}{h^2}
+\begin{bmatrix}
+y_2 - 2y_1 + y_0 \\
+y_3 - 2y_2 + y_1 \\
+y_4 - 2y_3 + y_2 \\
+y_5 - 2y_4 + y_3 \\
+\end{bmatrix}
+-
+\begin{bmatrix}
+y''_0 \\
+0 \\
+0 \\
+y''_5 \\
+\end{bmatrix}
+\]
+Sur la calculatrice : 
+\begin{itemize}
+    \item Matrice tridiagonale sto->(ctrl + var) -> A
+    \item menu -> Matrice et vecteur(7) -> simultané(6)
+    \item A,vecteur colonne de droite -> :=
+\end{itemize}
+
+

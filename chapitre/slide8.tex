@@ -1,0 +1,67 @@
+
+\hformbar{}
+
+\formdesc{ Résolition des systèmes linéaires}
+
+resoudre $A\vec{x} = \vec{b}$ pour trouver $\vec{x} \in \mathbb{R}^n$.
+
+\formtitle{hypotheses}
+
+\begin{itemize}
+    \item $A$ est une matrice $n \times n$.
+    \item $A$ est inversible.
+\end{itemize}
+
+\formtitle{methodes}
+
+\begin{itemize}
+\item \textbf{méthode directe}: $A^{-1}$ est calculé explicitement.
+
+Exemple : Elimination de Gauss, $LU$, $LL^t$, $QR$
+
+\item \textbf{méthode iterative}: $\vec{x}$ est calculé par une suite de vecteurs $\vec{x}_0, \vec{x}_1, \vec{x}_2, \dots$.
+\end{itemize}
+
+\formtitle{méthode iterative}
+
+\formtitle{Normes vecteurs}
+
+Classique : 
+
+$$\left||v|\right|_p = \left(\sum_{i=1}^n \left|v_i\right|^p\right)^{1/p}$$
+
+\begin{itemize}
+    \item $p=1$: norme $L_1$ (norme de Manhattan)
+    
+    $$\left||v|\right|_1 = \sum_{i=1}^n \left|v_i\right|$$
+    \item $p=2$: norme $L_2$ (norme euclidienne)
+    
+    $$\left||v|\right|_2 = \sqrt{\sum_{i=1}^n \left|v_i\right|^2}$$
+    \item $p=\infty$: norme $L_\infty$ (norme du maximum)
+    
+    $$\left||v|\right|_\infty = \max_{1 \leq i \leq n} \left|v_i\right|$$
+\end{itemize}
+
+\formtitle{Normes matricielles}
+
+$$\left||A\vec{v}|\right|_p \leq \left||A|\right|_p \left||\vec{v}|\right|_p \quad \forall \vec{v} \in \mathbb{R}^n \Longleftrightarrow \left||A|\right|_p = \max_{\vec{v} \neq 0} \frac{\left||A\vec{v}|\right|_p}{\left||\vec{v}|\right|_p}$$
+
+\begin{itemize}
+    \item $p=1$: norme $L_1$ 
+    $$\left||A|\right|_1 = \max_{j} \sum_{i=1}^n \left|a_{ij}\right|$$
+    \item $p=2$: norme $L_2$ 
+    $$\left||A|\right|_2 = max |\lambda(A^TA)|$$
+    \item $p=\infty$: norme $L_\infty$ 
+    $$\left||A|\right|_\infty = \left||A^T|\right|_1 =\max_{i} \sum_{j=1}^n \left|a_{ij}\right|$$
+\end{itemize}
+
+\formtitle{Lien entre $||\vec{x} - \vec{x}_k||$ et $||\vec{b} - A\vec{x}_{k}||$}
+
+\begin{align*}
+    \underbrace{\cfrac{||\vec{x} - \vec{x}_k||_p}{||\vec{x}||_p}} &\leq \underbrace{ ||A||_p ||A^{-1}||_p} & \underbrace{\cfrac{||\vec{b} - A\vec{x}_{k}||_p}{||\vec{b}||_p}} \\
+    \text{erreur relative} & \leq \kappa_p(A)  & \text{résidu relatif}
+\end{align*}
+
+$\kappa_p(A)$ est le conditionnement de $A$.
+Si $\kappa_p(A)$ est grand, alors $A$ est mal conditionné.
+

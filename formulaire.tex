@@ -1,0 +1,139 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LaTeX Template: Two Column Colour Article
+%
+% Source: http://www.howtotex.com/
+% Feel free to distribute this template, but please keep the
+% referal to howtotex.com.
+% Date: Feb 2011
+% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use overleaf.com: 
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% adaptions made by wolfgang stoettner mail@stoettner.net
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Preamble
+\documentclass[	DIV=calc,%
+				paper=a4,%
+				fontsize=11pt,%
+				twocolumn]{scrartcl} % KOMA-article class
+\usepackage[frenchb]{babel}	% English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype}	% Better typography
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage{pythontex} % Math packages
+\usepackage[pdftex]{graphicx} % Enable pdflatex
+\usepackage{wrapfig} % enable figure wrapping
+\usepackage[svgnames]{xcolor} % Enabling colors by their 'svgnames'
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats
+\usepackage{epstopdf} % Converts .eps to .pdf
+\usepackage{subfig}	% Subfigures
+\usepackage{booktabs} % Nicer tables
+\usepackage{fix-cm}	% Custom fontsizes
+\usepackage{float}
+\usepackage{tgtermes}
+\usepackage[default]{lato}
+\usepackage{newtxmath}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{stackengine}
+\usepackage{tikz,pgfplots,circuitikz,blox}
+\usepackage[export]{adjustbox}
+\usepgfplotslibrary{fillbetween}
+
+\usetikzlibrary{math}
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes.misc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows.meta,decorations.markings} % arrow and decorations
+
+
+
+%%% Custom sectioning (sectsty package)
+\usepackage{sectsty} % Custom sectioning (see below)
+\allsectionsfont{%		% Change font of al section commands
+	\usefont{OT1}{phv}{b}{n}%	% bch-b-n: CharterBT-Bold font
+	}
+
+\sectionfont{%		% Change font of \section command
+	\usefont{OT1}{phv}{b}{n}%	% bch-b-n: CharterBT-Bold font
+	}
+%%% Headers and footers
+\usepackage{fancyhdr} % Needed to define custom headers/footers
+	\pagestyle{fancy} % Enabling the custom headers/footers
+\usepackage{lastpage}	
+
+\newcommand{\varTitle}{Formulaire SysRF}
+\newcommand{\varAutor}{Antonin Kenzi}
+% Header (empty)
+\lhead{}
+\chead{}
+\rhead{\today}
+% Footer (you may change this to your own needs)
+\lfoot{\footnotesize \texttt{\varTitle} \textbullet \vspace{5pt} \varAutor}
+\cfoot{}
+\rfoot{\footnotesize page \thepage\ of \pageref{LastPage}}	% "Page 1 of 2"
+\renewcommand{\headrulewidth}{0.0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\newcommand{\hformbar}[1]{\vspace{1mm}\noindent\rule{\linewidth}{1pt}\\} % creates a horizontal bar to separate formulae better; space adaptions can be made centrally here
+
+
+%%% Creating an initial of the very first character of the content
+\usepackage{lettrine}
+\newcommand{\initial}[1]{%
+     \lettrine[lines=3,lhang=0.3,nindent=0em]{
+     				\color{DarkGoldenrod}
+     				{\textsf{#1}}}{}}
+
+%%% Title, author and date metadata
+\usepackage{titling} % For custom titles
+
+\newcommand{\HorRule}{\color{DarkGoldenrod}%	% Creating a horizontal rule
+									  	\rule{\linewidth}{1pt}%
+										}
+\pretitle{\vspace{-30pt} \begin{flushleft} \HorRule 
+				\fontsize{15}{15} \usefont{OT1}{phv}{b}{n} \color{DarkRed} \selectfont 
+				}
+\title{\varTitle} % Title of your article goes here
+\posttitle{\par\end{flushleft}}
+\preauthor{\vspace{-20pt} \begin{flushleft}\large \usefont{OT1}{phv}{b}{sl} \color{DarkRed}}
+\author{\varAutor}	% Author name goes here
+\postauthor{\vspace{-20pt} \footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black}  \par\end{flushleft}\HorRule}
+\date{\vspace{-30pt} \today} % No date
+\newcounter{mycounter}
+%%% wws: create a non-indented formula name
+\newcommand{\formdesc}[1]{\noindent\textbf{#1} \addtocounter{mycounter}{1} \hfill \textbf{\themycounter}}
+\newcommand{\formtitle}[1]{\noindent\underline{#1}}
+\setlength\parindent{0pt}
+%%% Begin document -----------------------------------------------------------------
+\begin{document}
+\maketitle
+\thispagestyle{fancy} 	% Enabling the custom headers/footers for the first page 
+% The first character should be within \initial{}
+
+\input{chapitre/slide1.tex}
+
+\input{chapitre/slide3.tex}
+
+\input{chapitre/slide4.tex}
+
+\input{chapitre/slide5.tex}
+
+\input{chapitre/slide7.tex}
+
+\input{chapitre/slide8.tex}
+
+\input{chapitre/slide9.tex}
+
+
+\end{document}

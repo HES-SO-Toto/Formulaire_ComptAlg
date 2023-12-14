@@ -1,0 +1,110 @@
+\hformbar
+
+\formdesc{Intégration : }
+
+\formtitle{Quadrature interpolation :}
+
+\formtitle{formule interpolatoire :}
+
+$$Q_n = \int_{a}^{b} P_n(x) dx = \sum_{i=0}^{n} f(x_k) \int_{a}^{b} L_k(x) dx = \sum_{i=0}^{n} f(x_k) w_k$$
+
+avec : $$w_k = \int_{a}^{b} L_k(x) dx = \int_{a}^{b} \prod_{j=0, j \neq k}^{n} \frac{x-x_j}{x_k-x_j} dx$$
+
+\begin{itemize}
+    \item $Q_n$ est une formule d'intégration de degré au moins $n$
+    \item $x_k$ sont les points de quadrature
+    \item $w_k$ sont les poids de quadrature
+\end{itemize}
+
+$$ E[f] = Q-I = \sum_{i=0}^{n} f(x_k) w_k - \int_{a}^{b} f(x) dx$$
+
+\hformbar
+
+\formdesc{Formule de Newton-Cotes :}
+
+Les formules interpolatoires polynomiales avec noeuds
+équidistants sont appelées des formules de Newton-Cotes
+
+\formtitle{Fermées (car a et b en font partie) :}
+
+$$x = a + (b-a)t \quad t \in [0,1] \Leftrightarrow dx = (b-a)dt$$
+
+$$w_k = (b-a) \int_{0}^{1} \prod_{j=0, j \neq k}^{n} \frac{nt-j}{k-j} dt$$
+
+$$\quad f_0 = f(a)$$
+
+\formtitle{ Trapezes (degré de precision 1) :}
+
+$Q_1 = \frac{h}{2} (f_0 + f_1) \quad h = b-a$
+
+\formtitle{ Simpson (degré de precision 3) :}
+
+$Q_2 = \frac{h}{3} (f_0 + 4f_1 + f_2) \quad h = \cfrac{b-a}{2} $
+
+\formtitle{ 3/8 de Newtown (degré de precision 3) :}
+
+$Q_3 = \frac{3h}{8} (f_0 + 3f_1 + 3f_2 + f_3) \quad h = \cfrac{b-a}{3} \quad f_0 = f(a)$
+
+\formtitle{ Boole (degré de precision 5) :}
+
+$Q_4 = \frac{2h}{45} (7f_0 + 32f_1 + 12f_2 + 32f_3 + 7f_4) \quad h = \cfrac{b-a}{4}$
+
+\formtitle{ degré de precision :}
+\begin{itemize}
+    \item Prendre nombre de point impaire.
+    \item subdiviser l'intervalle en sous intervalle de taille égale.
+\end{itemize}
+
+
+\formtitle{ Regles des trapezes composées :}
+
+$$T(h) = h\left[ \cfrac{1}{2} f(a) + \sum_{i=1}^{n-1} f(x_i) + \cfrac{1}{2} f(b) \right]$$
+
+avec $$h = \cfrac{b-a}{n}$$
+
+
+\formtitle{ Regle du point milieu}
+
+$$M(h) = h \sum_{i=1}^{n} f(x_{k+\frac{1}{2}}) \quad x_{k+\frac{1}{2}} = a + (k + \frac{1}{2})h$$
+
+Lien avec la regle des trapezes : 
+
+$$T\left(\cfrac{h}{2}\right) = \cfrac{1}{2} \left[T(h) + M(h)\right]$$
+
+exemple : 
+
+\begin{itemize}
+    \item $T(h) = h/2 (f_0+f_4)$
+    \item M(h) = $h(f_2)$
+    \item $T(h/2) = 1/2 (T(h) + M(h))$
+    \item $M(h/2) = h/2 (f_1+f_3)$
+    \item $T(h/4) = 1/2 (T(h/2) + M(h/2))$
+\end{itemize}
+
+\formtitle{Erreur (trapezes composées) :}
+convergence lente sauf cas optimal :
+\begin{itemize}
+    \item f(x) est périodique
+    \item f(x) infiniement dérivable
+    \item Intergrale sur une période
+\end{itemize}
+
+$$\left\lvert \int_{a}^{b} f(x) dx - T(h) \right\rvert \leq \cfrac{h^2 (b-a)}{12} max_{x \in [a,b]} \left\lvert f''(x) \right\rvert$$
+\formtitle{ Regles des Simpson composées :}
+
+Sous 4 interval de taille h = (b-a)/4
+
+$$S_c = \cfrac{h}{3} \left[ f_0 + 4f_1 + 2f_2 + 4f_3 + f_4 \right]$$
+
+\formtitle{ Paire : }
+2n sous intervalle de taille h = (b-a)/2n
+
+$$S_c = \cfrac{h}{3} \left[ f(a)+4f(x_1) + f(b) + 2 \sum_{i=1}^{n-1} f(x_{2i}) + 2f(x_{2i+1}) \right]$$ 
+
+\formtitle{ Erreur (Simpson composées) :}
+
+$$\left\lvert \int_{a}^{b} f(x) dx - S_c \right\rvert \leq \cfrac{h^4 (b-a)}{180} max_{x \in [a,b]} \left\lvert f^{(4)}(x) \right\rvert$$
+
+
+
+

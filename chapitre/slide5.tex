@@ -1,0 +1,244 @@
+\hformbar
+
+\formdesc{Equations non linéaires :}
+
+\formtitle{Méthode de la bissection :}
+
+Principe :
+
+\begin{itemize}
+    \item 2 point a et b tels que :
+    \begin{itemize}
+        \item f(x) continue sur [a,b]
+        \item f(a)f(b) < 0
+        \item f(x) contient au moins un zéro sur [a,b]
+    \end{itemize}
+\end{itemize}
+
+Algorithme : 
+\begin{enumerate}
+    \item $x_1 = \cfrac{a+b}{2}$ et $f(x_1)$
+    \item Si $f(x_1) = 0$ alors $x_1$ est la solution
+    \item Si $f(a)f(x_1) < 0$ alors $x_2 = \cfrac{a+x_1}{2}$ et $f(x_2)$
+    \item sinon a = x1 
+    \item on recommence 1
+\end{enumerate}
+
+Borne à priori : $|x_k - r| \leq \cfrac{b-a}{2^k} \quad r => f(r) = 0$
+
+\formtitle{Avantage et inconvénient :}
+
+\begin{itemize}
+    \item Avantage : 
+    \begin{itemize}
+        \item Convergence garantie
+        \item Facile à mettre en oeuvre
+    \end{itemize}
+    \item Inconvénient : 
+    \begin{itemize}
+        \item Convergence lente
+    \end{itemize}
+\end{itemize}
+
+\formtitle{Méthode de la sécante :}
+
+Principe :
+On remplace f (x) par une fonction plus simple et itère
+
+algorithme :
+
+\begin{enumerate}
+    \item Choisir $x_0$ et $x_1$
+    \item Calculer f($x_0$) et f($x_1$)
+    \item Remplacer f(x) par la droite passant par les points ($x_0$, f($x_0$)) et ($x_1$, f($x_1$))
+    \item determiner le zero de la droite
+    \item $x_0 = x_1$ et $x_1 = x_2$
+    \item on recommence 2
+\end{enumerate}
+
+formule :
+
+$$x_{k+1} = x_{k-1} - f(x_{k-1}) \cfrac{x_{k} - x_{k-1}}{f(x_{k}) - f(x_{k-1})}$$
+
+\formtitle{Avantage et inconvénient :}
+
+\begin{itemize}
+    \item Avantage : 
+    \begin{itemize}
+        \item Convergence superlinéaire $p = \cfrac{1 + \sqrt{5}}{2}$
+    \end{itemize}
+    \item Inconvénient : 
+    \begin{itemize}
+        \item Convergence non garantie
+    \end{itemize}
+\end{itemize}
+
+\formtitle{Méthode de Newton :}
+
+Principe :
+On remplace f (x) par la tangente en $x_k$
+
+Hypotheses : 
+f(x) est continument dérivable
+
+formule : 
+
+$$x_{k+1} = x_k - \cfrac{f(x_k)}{f'(x_k)}$$
+
+\formtitle{Avantage et inconvénient :}
+
+\begin{itemize}
+    \item Avantage : 
+    \begin{itemize}
+        \item Convergence quadratique
+        \item Facile à mettre en oeuvre
+        \item un seul point de départ
+        \item Généralisable à plusieurs variables
+    \end{itemize}
+    \item Inconvénient : 
+    \begin{itemize}
+        \item Convergence non garantie
+        \item Nécessite le calcul de la dérivée et la diférentabilité de f
+        \item deux evaluations de f par itération
+    \end{itemize}
+
+\end{itemize}	
+
+Ordre de convergence :
+
+$$ F'(x_k) = 1 - \cfrac{f'(x)^2 - f''(x)f(x)}{f'(x)^2} = \cfrac{f''(x)f(x)}{f'(x)^2}$$
+
+$$\lim_{x \to r} F'(x) = \cfrac{f''(r)f(r)}{f'(r)^2}$$ 
+
+$$ e_{k+1} = \cfrac{f''(r)f(r)}{2f'(r)^2} e_k^2$$ 
+
+avec 
+
+$$\cfrac{F''(r)}{2} = \cfrac{f''(r)}{2f'(r)}$$
+
+
+\formdesc{Equations non linéaires à plusieurs variables :}
+
+Principe :
+
+on cherche r tel que F(r) = r:
+
+\formtitle{Iteration du point fixe :}
+
+Algorithme :
+
+\begin{enumerate}
+    \item Choisir $x_0$
+    \item $x_{k+1} = G(x_k)$
+    \item on recommence 1
+\end{enumerate}
+
+$$||x_{k} - r|| \leq \cfrac{L^{k-l}}{1-L} ||x_{l+1} - x_{l}|| \quad  0 < l < 1$$
+
+\formtitle{Estimation à priori :}
+
+$$||x_{k} - r|| \leq \cfrac{L^{k}}{1-L} ||x_{1} - x_{0}|| \quad  l = 0$$
+
+\formtitle{Estimation à posteriori :}
+
+$$||x_{k} - r|| \leq \cfrac{L}{1-L} ||x_{k} - x_{k-1}|| \quad  l = k-1$$
+
+$$ L := max_{x \in [a,b]} ||J(x)||$$
+
+\formtitle{Jacobienne de F :}
+
+$$J(x) = \begin{pmatrix}
+    \cfrac{\partial F_1}{\partial x_1} &  \cdots & \cfrac{\partial F_1}{\partial x_n} \\
+    \vdots  & \ddots & \vdots  \\
+    \cfrac{\partial F_n}{\partial x_1} & \cdots & \cfrac{\partial F_n}{\partial x_n}
+
+\end{pmatrix}$$
+
+
+\formtitle{Norme de $||J(x)||$  :}\\
+sous la forme de la norme de frobenius
+
+$$||J(x)|| = \sqrt{\sum_{i=1}^{n} \sum_{j=1}^{n} \left\lvert \cfrac{\partial F_i}{\partial x_j} \right\rvert^2}$$
+
+\formtitle{Avantage et inconvénient :}
+
+\begin{itemize}
+    \item Avantage : 
+    \begin{itemize}
+        \item Résultat global 
+    \end{itemize}
+    \item Inconvénient : 
+    \begin{itemize}
+        \item Difficile de trouver le Domaine
+    \end{itemize}
+\end{itemize}
+
+\formtitle{Ordre de convergence :}
+
+$$||e_{k+1}|| \leq ||J(r)|| ||e_k||$$
+
+Generalement linéaire
+
+Convertion quadratique si $||J(r)|| = 0$
+
+\formtitle{Méthode de Newton :}
+
+Principe :
+
+On considère le système d'équation non linéaire :
+
+$$f(x,y) = 0 \quad g(x,y) = 0$$
+
+Algorithme :
+
+\begin{enumerate}
+    \item Choisir ($x_0$, $y_0$) proche de (r,s)
+    \item remplace ($x_0, y_0,f(x_0, y_0)$) par le plan tangent
+
+    {\hspace*{-1.5cm}$ T_f(x,y) = f(x_0, y_0) + (x-x_0) f_x(x_0, y_0) + (y-y_0) f_y(x_0, y_0)$}
+    
+    {\hspace*{-1.5cm}$ T_g(x,y) = g(x_0, y_0) + (x-x_0) g_x(x_0, y_0) + (y-y_0) g_y(x_0, y_0)$}
+    
+    \item determiner l'intersection des plans avec le plan Oxy (cela donne une droite)
+    \hspace{-1cm}$$T_f(x,y) = 0 \quad T_g(x,y) = 0$$
+
+    \item determiner le point d'intersection des droites
+    \item intersection des droites : ($x_1$, $y_1$) nouvelle approximation de (r,s)
+    \item on recommence 2 avec ($x_1$, $y_1$)
+\end{enumerate}
+
+\formtitle{la méthode de Newton(-Raphson)}
+
+\begin{align*}
+x_{k+1} &= x_k - \xi_k \\
+&= x_k - \cfrac{g(x_k, y_k)f_y(x_k, y_k) - f(x_k, y_k)g_y(x_k, y_k)}{f_x(x_k, y_k)g_y(x_k, y_k) - f_y(x_k, y_k)g_x(x_k, y_k)}\\
+y_{k+1} &= y_k - \eta_k \\
+&= y_k - \cfrac{f(x_k, y_k)g_x(x_k, y_k) - g(x_k, y_k)f_x(x_k, y_k)}{f_x(x_k, y_k)g_y(x_k, y_k) - f_y(x_k, y_k)g_x(x_k, y_k)}\\
+\end{align*}
+
+r = $x_k$ et s = $y_k$
+
+Ordre de convergence :
+
+Au moins égal à 2
+
+\formtitle{Généralisation :}
+
+\[F(r) = 0 \quad F = \begin{bmatrix}
+    f_1(x_1, x_2, ..., x_n)\\
+    f_2(x_1, x_2, ..., x_n)\\
+    \vdots \\
+    f_n(x_1, x_2, ..., x_n)
+\end{bmatrix}
+\]
+
+algorithme :
+
+\begin{enumerate}
+    \item Choisir $x_0 = (x_{1,0}, x_{2,0}, ..., x_{n,0})$
+    \item $x_{k+1} = x_k - J(x_k)^{-1} F(x_k)$
+    \item on recommence 1
+\end{enumerate}
+
+
+\formtitle{Ajouter peut-être Banach :}
