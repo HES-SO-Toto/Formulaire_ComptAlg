@@ -1,9 +1,67 @@
-\formtitle{Moindre carrés}
+\formtitle{Transformations de Householder}
 
-$A = QR$
+\begin{itemize}
+    \item Choisir $H_1$ pour que $H_1A$ ait des zeros dans la premiere colonne. 
+    
+$$
+A_1 = \begin{bmatrix}
+    * & * & * & * \\
+    0& * & * & * \\
+    0& * & * & * \\
+    0& * & * & * \\
+\end{bmatrix} = H_1A
+$$
+    \item Choisir $H_2$ pour que $H_2H_1A$ ait des zeros dans la deuxieme colonne.
 
-Q est une matrice orthogonale ($Q^T = Q^{-1}$) et $det(Q) = \pm 1$.
+\[
+A_2 = \begin{bmatrix}
+    * & * & * & * \\
+    0& * & * & * \\
+    0& 0 & * & * \\
+    0& 0 & * & * \\
+\end{bmatrix} = 
+\begin{bmatrix}
+1 & 0 \\
+0 & H^{(3)}
+\end{bmatrix} 
+                H_1 A =H_2H_1A
+\]
 
-R est une matrice triangulaire supérieure.
+    \item Choisir $H_3$ pour que $H_3H_2H_1A$ ait des zeros dans la troisieme colonne.
 
-\formtitle{
+\[
+    \hspace{-1cm}
+A_3 = \begin{bmatrix}
+    * & * & * & * \\
+    0& * & * & * \\
+    0& 0 & * & * \\
+    0& 0 & * & * \\
+\end{bmatrix} = 
+\begin{bmatrix}
+I &  0 \\
+0 & H^{(2)}
+\end{bmatrix} 
+                H_2 H_1 A =H_3 H_2 H_1 A
+\]
+\end{itemize}
+
+Algorithme :
+
+\begin{enumerate}
+    \item $\vec{x}$ donné par la colonne $j$ de $A$.
+    \item $$\vec{y} = \begin{bmatrix}
+        ||\vec{x}||_2 \\
+        0 \\
+        \vdots \\
+        0
+    \end{bmatrix}
+    $$
+    \item $\vec{u} = \vec{x} - \vec{y}$
+    \item $$H= I - 2 \frac{\vec{u}\vec{u}^T}{||\vec{u}||_2^2}$$
+    \item $$H_1 = \begin{bmatrix}
+        I  & 0 \\
+        0  & H \\
+    \end{bmatrix}
+    $$
+    
+\end{enumerate}

@@ -1,0 +1,112 @@
+\formtitle{Méthodes itératives}
+
+Principe commun : 
+
+\begin{enumerate}
+    \item Init : $x^{(0)}$ à 0 
+    \item Itération : $x^{(k)} \leftarrow x^{(k-1)}$
+    \item Jusqu'à condition d'arrêt
+\end{enumerate}
+
+\formtitle{Méthodes de Jacobi}
+
+$$x_i^{(k+1)} = \frac{1}{a_{ii}} \left( b_i - \sum_{j=1, j\neq i}^n a_{ij} x_j^{(k)} \right) \quad i=1,\dots,n$$
+
+
+\formtitle{Méthodes de Gauss-Seidel}
+
+$$x_i^{(k+1)} = \frac{1}{a_{ii}} \left( b_i - \sum_{j=1}^{i-1} a_{ij} x_j^{(k+1)} - \sum_{j=i+1}^n a_{ij} x_j^{(k)} \right) \quad i=1,\dots,n$$
+
+Exemple :
+\[
+\begin{bmatrix}
+    4&-1&1 \\
+    -1&4&-2 \\
+    1&-2&4\\ 
+\end{bmatrix}
+\begin{bmatrix}
+    x_1 \\
+    x_2 \\
+    x_3 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    12 \\
+    -1 \\
+    5 \\
+\end{bmatrix}
+\]
+
+Jacobi :
+
+\[
+\vec{x}^{(1)} = \begin{bmatrix}
+    3 \\
+    -0.25 \\
+    1.25 \\
+\end{bmatrix}
+\Rightarrow
+\vec{x}^{(2)} = \begin{bmatrix}
+    2.625 \\
+    1.125 \\
+    0.375 \\
+\end{bmatrix}
+\Rightarrow
+\vec{x}^{(3)} = \begin{bmatrix}
+    3.187 \\
+    0.593 \\
+    1.156 \\
+\end{bmatrix}
+\]
+
+Gauss-Seidel :
+
+\[
+\vec{x}^{(1)} = \begin{bmatrix}
+    3 \\
+    0.50 \\
+    0.75 \\
+\end{bmatrix}
+\Rightarrow
+\vec{x}^{(2)} = \begin{bmatrix}
+    2.9375 \\
+    0.8594 \\
+    0.9453 \\
+\end{bmatrix}
+\Rightarrow
+\vec{x}^{(3)} = \begin{bmatrix}
+    2.9785 \\
+    0.9678 \\
+    0.9890 \\
+\end{bmatrix}
+\]
+
+\formtitle{Méthodes de gradient}
+
+Algorithme de la plus grande pente :
+
+\begin{enumerate}
+    \item Init : $x^{(0)}$ dans $\mathbb{R}^n$
+    \item Itération : 
+        \begin{enumerate}
+            \item $\vec{d}_k = - \nabla G(x^{(k)}) = \vec{b} -A\vec{x}_{k} = \vec{r}_k$
+            \item $a_k = \cfrac{\vec{d}_k^T \vec{r}_k}{\vec{d}_k^T A \vec{d}_k} = \cfrac{\vec{r}_k^T \vec{r}_k}{\vec{r}_k^T A \vec{r}_k}$
+            \item $x^{(k+1)} = x^{(k)} + a_k \vec{d}_k$
+        \end{enumerate}
+\end{enumerate}
+
+\formtitle{Méthodes de gradient conjugué}
+
+\begin{enumerate}
+    \item Init : $x^{(0)}$ dans $\mathbb{R}^n$
+    \item initialiser $\vec{r}_0 = b - Ax^{(0)}$ et $\vec{d}_0 = \vec{r}_0$
+    \item Itération : 
+        \begin{enumerate}
+            \item $\vec{d}_k = - \nabla G(x^{(k)}) = \vec{b} -A\vec{x}_{k} = \vec{r}_k$
+            \item $a_k = \cfrac{\vec{d}_k^T \vec{r}_k}{\vec{d}_k^T A \vec{d}_k}$
+            \item $x^{(k+1)} = x^{(k)} + a_k \vec{d}_k$
+            \item $\vec{r}_{k+1} = \vec{r}_k + a_k A \vec{d}_k$
+            \item $\beta_{k+1} = \cfrac{\vec{r}_{k+1}^T \vec{r}_{k+1}}{\vec{r}_k^T \vec{r}_k}$
+            \item $\vec{d}_{k+1} = - \vec{r}_{k+1} + \beta_{k+1} \vec{d}_k$
+        \end{enumerate}
+\end{enumerate}
