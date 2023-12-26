@@ -1,0 +1,61 @@
+\hformbar{}
+
+\formtitle{Resolition numerique des EDOs}
+
+\formdesc{modéle exponentiel}
+
+\begin{align*}
+    \frac{d\vec{x}}{dt} &= \lambda \vec{x} \\
+    \vec{x}(0) &= \vec{x}_0
+\end{align*}
+
+\formdesc{modéle logistique}
+
+\begin{align*}
+    \frac{dx}{dt} &= k x(t) (M-x(t)) \\
+    x(0) &= x_0
+\end{align*}
+
+\formdesc{modéle de Lotka-Volterra}
+
+\begin{align*}
+    \frac{dx}{dt} &= \alpha x(t) - \beta x(t)y(t) \\
+    \frac{dy}{dt} &= \gamma x(t)y(t) - \delta y(t) \\
+    x(0) &= x_0 \\
+    y(0) &= y_0
+\end{align*}
+
+\formdesc{Problème de Cauchy}
+
+\begin{align*}
+    \frac{d\vec{u}}{dt} &= \vec{f}(t, \vec{u}(t)) \\
+    \vec{u}(t_0) &= \vec{u}_0
+\end{align*}
+
+Si ED n'est pas sous la forme de Cauchy, on peut faire une reduction de l'ordre.
+
+Transformation de l'EDO d'ordre $n \leq 1$
+
+$$ \frac{d^ny}{dt^n} = y^{(n)} = f(t, y, y', y'', \dots,y^{(n-1)} = f(t, y_1, y_2, \dots,y_{n(t)}) $$
+
+$$\cfrac{d\vec{u}(t)}{dt} = \begin{bmatrix}
+    y1(t) \\
+    y2(t) \\
+    \vdots \\
+    y_{n-1}(t) \\
+    y_n(t)
+\end{bmatrix} = \begin{bmatrix}
+    y2(t) \\
+    y3(t) \\
+    \vdots \\
+    y_n(t) \\
+    f(t, y_1, y_2, \dots,y_{n(t)})
+\end{bmatrix} = \vec{f}(t, \vec{u}(t))$$
+
++ condition initiale $\vec{u}(t_0) = \vec{u}_0 = \begin{bmatrix}
+    y_1(t_0) \\
+    y_2(t_0) \\
+    \vdots \\
+    y_n(t_0)
+\end{bmatrix}$
+
