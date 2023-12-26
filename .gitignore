@@ -22,3 +22,7 @@ formulaire.pytxcode
 formulaire.log
 formulaire.fls
 formulaire.fdb_latexmk
+formulaire.log
+formulaire.synctex.gz
+out/formulaire.xdv
+formulaire.log

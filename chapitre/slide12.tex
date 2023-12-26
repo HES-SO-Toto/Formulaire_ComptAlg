@@ -59,3 +59,103 @@ $$\cfrac{d\vec{u}(t)}{dt} = \begin{bmatrix}
     y_n(t_0)
 \end{bmatrix}$
 
+\formdesc{Méthode d'Euler explicite}
+
+$$ \cfrac{du}{dt} = f(t, u(t)) \quad u(t_0) = u_0 $$
+
+Discrétisation de l'intervalle $[t_0, t_0 + T]$ en $N$ sous-intervalles de longueur $h = \cfrac{T}{N}$
+
+$$ t_{k+1} = t_k + h \quad k = 0, 1, \dots, N-1 $$
+
+$$ u_{k+1} = u_k + h f(t_k, u_k) \quad k = 0, 1, \dots, N-1 $$
+
+\formdesc{Méthode d'Euler modifiée (Heun)}
+
+$$ \vec{s_1} = \vec{f}(t_k, \vec{u}_k) $$
+$$ \vec{s_2} = \vec{f}(t_k + h, \vec{u}_k + h \vec{s_1}) $$
+$$ \vec{u}_{k+1} = \vec{u}_k + \cfrac{h}{2} (\vec{s_1} + \vec{s_2}) $$
+
+\formdesc{Méthode de point milieu}
+
+$$ \vec{s_1} = \vec{f}(t_k, \vec{u}_k) $$
+$$ \vec{s_2} = \vec{f}(t_k + \cfrac{h}{2}, \vec{u}_k + \cfrac{h}{2} \vec{s_1}) $$
+$$ \vec{u}_{k+1} = \vec{u}_k + h \vec{s_2} $$
+
+\formdesc{Méthode de optimale}
+
+$$ \vec{s_1} = \vec{f}(t_k, \vec{u}_k) $$
+$$ \vec{s_2} = \vec{f}(t_k + \cfrac{h}{2}, \vec{u}_k + \cfrac{h}{2} \vec{s_1}) $$
+
+$$ \vec{u}_{k+1} = \vec{u}_k + h (\cfrac{1}{4} \vec{s_1} + \cfrac{3}{4} \vec{s_2}) $$
+
+\formdesc{Méthode de Runge-Kutta à 2 étages}
+
+$$ \vec{s_1} = \vec{f}(t_k, \vec{u}_k) $$
+$$ \vec{s_2} = \vec{f}(t_k + c_2 h, \vec{u}_k + a_{21} h \vec{s_1}) $$
+$$ \vec{u}_{k+1} = \vec{u}_k + h (w_1 \vec{s_1} + w_2 \vec{s_2}) $$
+
+$$ w_1 = 1 - \cfrac{1}{2c_2} \quad w_2 = \cfrac{1}{2c_2} $$
+\formdesc{Tableau de Butcher}
+
+\begin{tabular}{c|cc}
+    $0$ &  &  \\
+    $c_2$ & $a_{21}$ &  \\
+    \hline
+          & $w_1$    & $w_2$ \\
+\end{tabular}
+
+
+\formdesc{Méthode de Runge-Kutta à 3 étages}
+
+$$ \vec{s_1} = \vec{f}(t_k, \vec{u}_k) $$
+$$ \vec{s_2} = \vec{f}(t_k + c_2 h, \vec{u}_k + a_{21} h \vec{s_1}) $$
+$$ \vec{s_3} = \vec{f}(t_k + c_3 h, \vec{u}_k + a_{31} h \vec{s_1} + a_{32} h \vec{s_2}) $$
+$$ \vec{u}_{k+1} = \vec{u}_k + h (w_1 \vec{s_1} + w_2 \vec{s_2} + w_3 \vec{s_3}) $$
+
+$$ w_1 = 1 - \cfrac{1}{2c_2} - \cfrac{1}{2c_3} \quad w_2 = \cfrac{1}{2c_2} \quad w_3 = \cfrac{1}{2c_3} $$
+
+\begin{tabular}{c|ccc}
+    $0$ &  &  &  \\
+    $c_2$ & $a_{21}$ &  &  \\
+    $c_3$ & $a_{31}$ & $a_{32}$ &  \\
+    \hline
+          & $w_1$    & $w_2$    & $w_3$ \\
+\end{tabular}
+
+\formdesc{Méthode de Runge-Kutta à 4 étages}
+
+$$ \vec{s_1} = \vec{f}(t_k, \vec{u}_k) $$
+$$ \vec{s_2} = \vec{f}(t_k + c_2 h, \vec{u}_k + a_{21} h \vec{s_1}) $$
+$$ \vec{s_3} = \vec{f}(t_k + c_3 h, \vec{u}_k + a_{31} h \vec{s_1} + a_{32} h \vec{s_2}) $$
+$$ \vec{s_4} = \vec{f}(t_k + c_4 h, \vec{u}_k + a_{41} h \vec{s_1} + a_{42} h \vec{s_2} + a_{43} h \vec{s_3}) $$
+$$ \vec{u}_{k+1} = \vec{u}_k + h (w_1 \vec{s_1} + w_2 \vec{s_2} + w_3 \vec{s_3} + w_4 \vec{s_4}) $$
+
+\begin{tabular}{c|cccc}
+    $0$ &  &  &  &  \\
+    $\cfrac{1}{2} $ & $\cfrac{1}{2}$ &  &  &  \\
+    $\cfrac{1}{2} $ & $0$ & $\cfrac{1}{2}$ &  &  \\
+    $1$ & $0$ & $0$ & $1$ &  \\
+    \hline
+          & $1/6$    & $1/3$    & $1/3$ & $1/6$ \\
+\end{tabular}
+
+\formdesc{Estimation de l'erreur}
+
+$$ \vec{u}_{k+1} = \vec{u}_k + h \Phi(t_k, \vec{u}_k, h) $$
+
+Type d'erreur :
+
+\begin{itemize}
+    \item Globale : commis dans l'intervalle $[t_0, t_0 + T]$
+    
+    $E(T) = \vec{u}(T) - \vec{u}_n$
+    \item locale : commis à chaque étape $k$
+    \item 
+    $e_{k+1} = \vec{u}(t_{k+1}) - \vec{u}_{k+1} = \vec{u}(t_{k+1}) - \vec{u}(t_k) - h \Phi(t_k, \vec{u}_k, h)$
+    \item arrondi : approximations numériques des calculs
+    
+    $R_{k+1} = \vec{u}_{k+1} - \vec{U}_{k+1}$
+
+    \item total : $|u(T) - U_n| \leq |E(T)| + |R_n|$
+
+\end{itemize}

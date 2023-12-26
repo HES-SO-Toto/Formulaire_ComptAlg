@@ -1,0 +1,44 @@
+\formdesc{Stabilité conditionnelle des methodes explicites}
+
+Methodes explicites seulement conditionnellement stables.
+il faut que le pas $h < h_{max}$
+
+\formdesc{Stabilité absolue des methodes implicites}
+
+Methodes implicites sont toujours stables.
+
+\formdesc{Méthode d'Euler implicite (backward)}
+
+Algorithme :
+
+\begin{enumerate}
+    \item init $\vec{u}_{0} $
+    \item $\vec{u}_{k+1} = \vec{u}_{k} + h_k \vec{f}(t_{k+1}, \vec{u}_{k+1})$
+\end{enumerate}
+équatation non-linéaire a résoudre a chaque étape.
+
+\formdesc{Méthode implicite de Cranck-Nicholson}
+
+Algorithme :
+
+\begin{enumerate}
+    \item init $\vec{u}_{0} $
+    \item $\vec{u}_{k+1} = \vec{u}_{k} + \cfrac{h_k}{2} (\vec{f}(t_{k}, \vec{u}_{k}) + \vec{f}(t_{k+1}, \vec{u}_{k+1}))$
+\end{enumerate}
+équatation non-linéaire a résoudre a chaque étape.
+
+\formdesc{Méthode Euler symplectique (explicite, "conservative")}
+
+Algorithme :
+
+\begin{enumerate}
+    \item init $\vec{u}_{0} = \binom{v_0}{x_0} = \binom{x'(t_0)}{x(t_0)}$
+    \item $\vec{u}_{k+1} = \binom{v_{k+1}}{x_{k+1}} = \binom{v_{k}}{x_{k}} + h_k \binom{F(t_k,x_k,v_k)}{(v_{k+1})}$
+\end{enumerate}
+
+\formdesc{Irrécupérable : problème  numeriquement mal posés }
+
+problème bien posé (conditionné) = petites perturbations des données \vec{f}(t, \vec{u}) et
+\vec{u}(t_0) entrainent de petites perturbations de la solution \vec{u}(t).
+
+Methodes numériques = petites perturbations causée par les erreurs d'arrondi
