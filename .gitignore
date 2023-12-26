@@ -17,3 +17,8 @@
 *.lvlps
 .cache/
 formulaire.synctex(busy)
+formulaire.synctex.gz
+formulaire.pytxcode
+formulaire.log
+formulaire.fls
+formulaire.fdb_latexmk
