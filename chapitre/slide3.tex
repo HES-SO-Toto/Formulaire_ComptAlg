@@ -58,28 +58,31 @@ $Q_4 = \frac{2h}{45} (7f_0 + 32f_1 + 12f_2 + 32f_3 + 7f_4) \quad h = \cfrac{b-a}
 
 \formtitle{ Regles des trapezes composées :}
 
-$$T(h) = h\left[ \cfrac{1}{2} f(a) + \sum_{i=1}^{n-1} f(x_i) + \cfrac{1}{2} f(b) \right]$$
-
-avec $$h = \cfrac{b-a}{n}$$
-
-
+{\hspace{-1cm}
+$T(h) = h\left[ \cfrac{1}{2} f(a) + \sum_{i=1}^{n-1} f(x_i) + \cfrac{1}{2} f(b) \right]$ avec $h = \cfrac{b-a}{n}$
+}
 \formtitle{ Regle du point milieu}
 
-$$M(h) = h \sum_{i=1}^{n} f(x_{k+\frac{1}{2}}) \quad x_{k+\frac{1}{2}} = a + (k + \frac{1}{2})h$$
+$$M(h) = h \sum_{i=1}^{n} f(x_{k+\frac{1}{2}}) =  h \sum_{i=0}^{n} f\left(\left(2k+1\right)\cfrac{h}{2}\right)$$
 
-Lien avec la regle des trapezes : 
+Lien avec la regle des trapèzes : 
 
 $$T\left(\cfrac{h}{2}\right) = \cfrac{1}{2} \left[T(h) + M(h)\right]$$
 
-exemple : 
+Calculatrice : 
 
-\begin{itemize}
-    \item $T(h) = h/2 (f_0+f_4)$
-    \item M(h) = $h(f_2)$
-    \item $T(h/2) = 1/2 (T(h) + M(h))$
-    \item $M(h/2) = h/2 (f_1+f_3)$
-    \item $T(h/4) = 1/2 (T(h/2) + M(h/2))$
-\end{itemize}
+Init  : $n = 1$ et $h = (b-a)/n$ \\
+$T(0) = h/2 (f(a) + f(b))$\\
+
+Boucle : 
+\begin{enumerate}
+    \item $M(h) = h \sum_{i=0}^{n} f\left(\left(2k+1\right)\cfrac{h}{2}\right) $
+    \item $T(h) = 1/2 (T(h) + M(h))$
+    \item $n = 2n$
+    \item $h = (b-a)/n$
+\end{enumerate}
+
+\newpage 
 
 \formtitle{Erreur (trapezes composées) :}
 convergence lente sauf cas optimal :
@@ -89,7 +92,8 @@ convergence lente sauf cas optimal :
     \item Intergrale sur une période
 \end{itemize}
 
-$$\left\lvert \int_{a}^{b} f(x) dx - T(h) \right\rvert \leq \cfrac{h^2 (b-a)}{12} max_{x \in [a,b]} \left\lvert f''(x) \right\rvert$$
+$\left\lvert \int_{a}^{b} f(x) dx - T(h) \right\rvert \leq \cfrac{h^2 (b-a)}{12} max_{x \in [a,b]} \left\lvert f''(x) \right\rvert$
+
 \formtitle{ Regles des Simpson composées :}
 
 Sous 4 interval de taille h = (b-a)/4

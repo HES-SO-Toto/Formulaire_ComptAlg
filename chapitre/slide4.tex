@@ -1,24 +1,25 @@
+\hformbar
+
 \formdesc{Intégration de Romberg }
 
 \formtitle{Principe :}
 
-$$T_{i,0} = T(h_i) \quad h_i = \cfrac{b-a}{2^i}$$
-
-$$T_{i,j} = \cfrac{4^j T_{i,j-1} - T_{i-1,j-1}}{4^j - 1}$$
+$T_{i,0} = T(h_i) \quad h_i = \cfrac{b-a}{2^i}$ et 
+$T_{i,j} = \cfrac{4^j T_{i,j-1} - T_{i-1,j-1}}{4^j - 1}$
 
 \begin{tikzpicture}
     % Nodes
     \node (T00) at (0,0) {$T_{0,0}$};
-    \node[below=0.2cm of T00] (T10) {$T_{1,0}$};
-    \node[below=0.2cm of T10] (T20) {$T_{2,0}$};
-    \node[below=0.2cm of T20] (T30) {$T_{3,0}$};
+    \node[below=0.1cm of T00] (T10) {$T_{1,0}$};
+    \node[below=0.1cm of T10] (T20) {$T_{2,0}$};
+    \node[below=0.1cm of T20] (T30) {$T_{3,0}$};
     
     \node[right=2cm of T10] (T11) {$T_{1,1}$};
-    \node[below=0.2cm of T11] (T21) {$T_{2,1}$};
-    \node[below=0.2cm of T21] (T31) {$T_{3,1}$};
+    \node[below=0.1cm of T11] (T21) {$T_{2,1}$};
+    \node[below=0.1cm of T21] (T31) {$T_{3,1}$};
 
     \node[right=2cm of T21] (T22) {$T_{2,2}$};
-    \node[below=0.2cm of T22] (T32) {$T_{3,2}$};
+    \node[below=0.1cm of T22] (T32) {$T_{3,2}$};
 
     \node[right=2cm of T32] (T33) {$T_{3,3}$};
 
@@ -35,10 +36,10 @@ $$T_{i,j} = \cfrac{4^j T_{i,j-1} - T_{i-1,j-1}}{4^j - 1}$$
   \end{tikzpicture}
 
   Attention : 
-  
+ {\small 
   Si fonction a une singularité, amélioration de la précision pas significative.
   Si fonction est périodique et infiniement dérivable, Trapezes composées est optimal.
-
+}
   \formdesc{Intégration de Gauss}
 
   $$\int_{a}^{b} f(x) dx = \sum_{i=1}^{n} w_i f(x_i)$$
@@ -47,9 +48,10 @@ $$T_{i,j} = \cfrac{4^j T_{i,j-1} - T_{i-1,j-1}}{4^j - 1}$$
 
 \formtitle{Polynomes de Legendre :}
 
-$$P_n(x) = \cfrac{1}{2^n n!} \cfrac{d^n}{dx^n} \left[ (x^2 - 1)^n \right]$$
+$P_n(x) = \cfrac{1}{2^n n!} \cfrac{d^n}{dx^n} \left[ (x^2 - 1)^n \right]$
 
-$$P_0(x) = 1 \quad P_1(x) = x \quad P_2(x) = \cfrac{1}{2} (3x^2 - 1)$$
+$P_0(x) = 1 \quad P_1(x) = x \quad P_2(x) = \cfrac{1}{2} (3x^2 - 1)$
 
-$$P_3(x) = \cfrac{1}{2} (5x^3 - 3x) \quad P_4(x) = \cfrac{1}{8} (35x^4 - 30x^2 + 3)$$
+$P_3(x) = \cfrac{1}{2} (5x^3 - 3x) \quad P_4(x) = \cfrac{1}{8} (35x^4 - 30x^2 + 3)$
 
+\newpage

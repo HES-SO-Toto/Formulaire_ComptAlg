@@ -2,6 +2,34 @@
 
 \formdesc{Courbes de Bézier :}
 
+\begin{tikzpicture}
+    % Points de contrôle
+    \coordinate (P0) at (0,0);
+    \coordinate (P1) at (3,2);
+    \coordinate (P2) at (6,0);
+  
+    % Midpoints
+    \coordinate (Q_0) at ($(P0)!0.45!(P1)$);
+    \coordinate (Q_1) at ($(P1)!0.55!(P2)$);
+    \coordinate (P) at ($(Q_0)!0.5!(Q_1)$);
+  
+    % Courbe de Bézier
+    \draw[red] (P0) .. controls (P1) and (P2) .. (P2);
+  
+    % Points de contrôle
+    \foreach \p in {P0,P1,P2}
+      \filldraw [red] (\p) circle (2pt) node[above right] {$\p$};
+  
+    % Construction points
+    \foreach \p in {Q_0,Q_1,P}
+      \filldraw [blue] (\p) circle (2pt) node[below left] {$\p$};
+  
+    % Construction lines
+    \draw[dashed, blue] (P0) -- (Q_0) -- (P1) -- (Q_1) -- (P2);
+    \draw[dashed, blue] (Q_0) -- (P) -- (Q_1);
+  \end{tikzpicture}
+
+
 \formtitle{Algorithme de De Casteljau :}
 
 \formtitle{Ordre 1 :}
@@ -33,6 +61,30 @@ On construit d'abord deux courbes de Bézier d'ordre 2
     & = \dots \\
     & = (1-t)^3P_0 + 3t(1-t)^2P_1 + 3t^2(1-t)P_2 + t^3P_3 \\
 \end{align*}
+
+\formtitle{Calcul du point :}
+
+\begin{tabular}{c c c c}
+    $P_0$ & & & \\
+    $P_1$ & $Q_{01}$ & & \\
+    $P_2$ & $Q_{12}$ & $R_{12}$ & \\
+    $P_3$ & $Q_{23}$ & $R_{22}$ & $P$ \\
+
+
+\end{tabular}
+
+Exemple : 
+
+$P_0 = \binom{0}{0} \quad P_1 = \binom{1}{2} \quad P_2 = \binom{3}{2} \quad P_3 = \binom{3}{0}$
+
+\begin{tabular}{c c c c}
+    $\binom{0}{0}$ & & & \\
+    $\binom{1}{2}$ & $\binom{0.5}{1}$ & & \\
+    $\binom{3}{2}$ & $\binom{2}{2}$ & $\binom{1.25}{1.5}$ & \\
+    $\binom{3}{0}$ & $\binom{3}{1}$ & $\binom{2.5}{1.5}$ & $\binom{1.875}{1.5}$ \\
+\end{tabular}
+
+
 
 \formtitle{Propriétés :}
 

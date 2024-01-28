@@ -19,8 +19,6 @@
 
 \formtitle{forme de Newton :} 
 
-\noindent{ \hfill$P_n(x) = c_0 + c_n \prod_{i=0}^{n-1}(x - x_i) $ \hfill}
-
 \noindent{ \hfill$f[x_0] = y_0 = c_0$ \hfill}
 \noindent{ \hfill$f[x_n] = y_n$ \hfill}
 
@@ -32,20 +30,22 @@
 
 \formtitle{Schéma de newtown:} 
 
-
+{
+\hspace{-1cm}
 \begin{tikzpicture}
+    \footnotesize
     % Nodes
     \node (x0) at (0,0) {$x_0$};
-    \node[right=0.5cm of x0] (f_x0) {$f[x_0]$};
+    \node[right=0.5cm of x0] (f_x0) {$f[x_0] = c_0$};
   
     \node[below=0.5cm of x0] (x1) {$x_1$};
     \node[right=0.5cm of x1] (f_x1) {$f[x_1]$};
-    \node[below right=-.1cm and 1cm of f_x0] (f_x0_x1) {$f[x_0, x_1]$};
+    \node[below right=-.1cm and 1cm of f_x0] (f_x0_x1) {$f[x_0, x_1] = c_1$};
 
     \node[below=.5cm of x1] (x2) {$x_2$};
     \node[right=0.5cm of x2] (f_x2) {$f[x_2]$};
     \node[below=.5cm of f_x0_x1] (f_x1_x2) {$f[x_1, x_2]$};
-    \node[below right=-.1cm and 1cm of f_x0_x1] (f_x0_x1_x2) {$f[x_0, x_1, x_2]$};
+    \node[below right=-.1cm and 1cm of f_x0_x1] (f_x0_x1_x2) {$f[x_0, x_1, x_2] = c_2$};
    
 
     \draw (x0.east) ++(0.25,0.25) -- ++(0,-2.5);
@@ -62,15 +62,91 @@
   \end{tikzpicture}
 
 
+  \noindent{ \hfill$P_n(x) = c_0 + c_n \prod_{i=0}^{n-1}(x - x_i) $ \hfill}
+}
 
+\formtitle{Schéma de horner:}
+
+$P_n = a\cdot x^N + b\cdot x^(N-1) + ... + e$
+
+
+\begin{tikzpicture}
+  \usetikzlibrary{positioning}
+
+  % Nodes
+  \node (x4) at (1,0) {$x^4$};
+  \node[right=1cm of x4] (x3) {$x^3$};
+  \node[right=1cm of x3] (x2) {$x^2$};
+  \node[right=1cm of x2] (x1) {$x^1$};
+  \node[right=1cm of x1] (x0) {$x^0$};
+  \node[below=0.15cm of x4] (a) {$a$};
+  \node[below=0.15cm of x3] (b) {$b$};
+  \node[below=0.15cm of x2] (c) {$c$};
+  \node[below=0.15cm of x1] (d) {$d$};
+  \node[below=0.15cm of x0] (e) {$e$};
+  %line 
+  \draw (a.south) ++(-1cm,-0.15) -- ++(8,0);
+  \node[below=1.25cm of a] (A) {$A$};
+  \node[left=0.25cm of A] (xe) {$x_{e}$};
+  \node[right=1cm of A] (B) {$B$};
+  \node[right=1cm of B] (C) {$C$};
+  \node[right=1cm of C] (D) {$D$};
+  \node[right=1cm of D] (Result) {$P(x_{e})$};
+
+
+  \node[above=0.5cm of B] (AEVAL) {$A_{Eval}$};
+  \node[above=0.5cm of C] (BEVAL) {$B_{Eval}$};
+  \node[above=0.5cm of D] (CEVAL) {$C_{Eval}$};
+  \node[above=0.5cm of Result] (DEVAL) {$D_{Eval}$};
+  
+  \draw (A.south) ++(-1cm,-0.15) -- ++(8,0);
+
+  \node[below=1.25cm of A] (A') {$A'$};
+  \node[left=0.25cm of A'] (xe) {$x_{e}$};
+  \node[right=1cm of A'] (B') {$B'$};
+  \node[right=1cm of B'] (C') {$C'$};
+  \node[right=1cm of C'] (Result') {$P'(x_{e})$};
+
+  \node[above=0.5cm of B'] (AEVAL') {$A_{Eval}'$};
+  \node[above=0.5cm of C'] (BEVAL') {$B_{Eval}'$};
+  \node[above=0.5cm of Result'] (CEVAL') {$C_{Eval}'$};
+
+  \node[above=0.5cm of B] (AEVAL) {$A_{Eval}$};
+  \node[above=0.5cm of C] (BEVAL) {$B_{Eval}$};
+  \node[above=0.5cm of D] (CEVAL) {$C_{Eval}$};
+  \node[above=0.5cm of Result] (DEVAL) {$D_{Eval}$};
+
+
+  % Arrows
+  \draw[->,>=Stealth] (a.south) -- node[above] {} (A.north);
+  \draw[->,>=Stealth,color = Green] (A.east) -- node[midway,right] {$\cdot x_{e}$} (AEVAL.west);
+  \draw[->,>=Stealth,color =Blue] (AEVAL.south) -- node[midway,right] {$+b$} (B.north);
+  \draw[->,>=Stealth,color = Green] (B.east) -- node[midway,right] {$\cdot x_{e}$} (BEVAL.west);
+  \draw[->,>=Stealth,color =Blue] (BEVAL.south) -- node[midway,right] {$+c$} (C.north);
+  \draw[->,>=Stealth,color = Green] (C.east) -- node[midway,right] {$\cdot x_{e}$} (CEVAL.west);
+  \draw[->,>=Stealth,color =Blue] (CEVAL.south) -- node[midway,right] {$+d$} (D.north);
+  \draw[->,>=Stealth,color = Green] (D.east) -- node[midway,right] {$\cdot x_{e}$} (DEVAL.west);
+  \draw[->,>=Stealth,color =Blue] (DEVAL.south) -- node[midway,right] {$+e$} (Result.north);
+
+  \draw[->,>=Stealth] (A.south) -- node[midway,right] {} (A'.north);
+  \draw[->,>=Stealth,color = Green] (A'.east) -- node[midway,right] {$\cdot x_{e}$} (AEVAL'.west);
+  \draw[->,>=Stealth,color =Blue] (AEVAL'.south) -- node[midway,right] {$+b$} (B'.north);
+  \draw[->,>=Stealth,color = Green] (B'.east) -- node[midway,right] {$\cdot x_{e}$} (BEVAL'.west);
+  \draw[->,>=Stealth,color =Blue] (BEVAL'.south) -- node[midway,right] {$+c$} (C'.north);
+  \draw[->,>=Stealth,color = Green] (C'.east) -- node[midway,right] {$\cdot x_{e}$} (CEVAL'.west);
+  \draw[->,>=Stealth,color =Blue] (CEVAL'.south) -- node[midway,right] {$+d$} (Result'.north);
+
+\end{tikzpicture}
+
+$P_n = E + x\cdot (D + x\cdot (C + x\cdot (B + x\cdot A)))$
 
 \formtitle{Erreur d'interpolation :} 
 
 \noindent{ \hfill$ \left\lvert f(x) - P_n(x) \right\rvert \leq \cfrac{M_{n+1}}{(n+1)!} \left\lvert \prod_{i=0}^{n}(x-x_i) \right\rvert $ \hfill}
 
 \noindent{ \hfill$ M_{n+1} := max_{\xi \in [a,b]} \left\lvert f^{(n+1)}(\xi)\right\rvert  $ \hfill}
+\newpage
 
-\hformbar
 
 \formdesc{Splines : }
 

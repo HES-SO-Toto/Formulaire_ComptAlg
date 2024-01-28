@@ -73,6 +73,7 @@ $$x_{k+1} = x_{k-1} - f(x_{k-1}) \cfrac{x_{k} - x_{k-1}}{f(x_{k}) - f(x_{k-1})}$
     \end{itemize}
 \end{itemize}
 
+\newpage
 \formtitle{Méthode de Newton :}
 
 Principe :
@@ -121,7 +122,15 @@ $$\cfrac{F''(r)}{2} = \cfrac{f''(r)}{2f'(r)}$$
 
 Principe :
 
-on cherche r tel que F(r) = r:
+on cherche r tel que F(r) = r: 
+
+Donc à transformer $f(x) \rightarrow F(x) = x = \dots$ 
+
+Condition de convergence : $|F'(x)| < 1$
+
+$$ L := max_{x \in [a,b]} |F'(x)|$$
+
+$ C = |F'(r)|$ \quad $C^k = |F'(x_k)|$ so $k >= \cfrac{ln(Precision)}{ln(C)}$
 
 \formtitle{Iteration du point fixe :}
 
@@ -129,21 +138,20 @@ Algorithme :
 
 \begin{enumerate}
     \item Choisir $x_0$
-    \item $x_{k+1} = G(x_k)$
+    \item $x_{k+1} = F(x_k)$ ou ${x_{k+1},y_{k+1}} = F(x_k,y_k)$
     \item on recommence 1
 \end{enumerate}
 
-$$||x_{k} - r|| \leq \cfrac{L^{k-l}}{1-L} ||x_{l+1} - x_{l}|| \quad  0 < l < 1$$
+$$|x_{k} - r| \leq \cfrac{L^{k-l}}{1-L} |x_{l+1} - x_{l}| \quad  0 < l < 1$$
 
 \formtitle{Estimation à priori :}
 
-$$||x_{k} - r|| \leq \cfrac{L^{k}}{1-L} ||x_{1} - x_{0}|| \quad  l = 0$$
+$$|x_{k} - r| \leq \cfrac{L^{k}}{1-L} |x_{1} - x_{0}| \quad  l = 0$$
 
 \formtitle{Estimation à posteriori :}
 
-$$||x_{k} - r|| \leq \cfrac{L}{1-L} ||x_{k} - x_{k-1}|| \quad  l = k-1$$
+$$|x_{k} - r| \leq \cfrac{L}{1-L} |x_{k} - x_{k-1}| \quad  l = k-1$$
 
-$$ L := max_{x \in [a,b]} ||J(x)||$$
 
 \formtitle{Jacobienne de F :}
 
@@ -155,10 +163,14 @@ $$J(x) = \begin{pmatrix}
 \end{pmatrix}$$
 
 
-\formtitle{Norme de $||J(x)||$  :}\\
+\formtitle{Norme de $|J(x)|$  :}\\
 sous la forme de la norme de frobenius
 
-$$||J(x)|| = \sqrt{\sum_{i=1}^{n} \sum_{j=1}^{n} \left\lvert \cfrac{\partial F_i}{\partial x_j} \right\rvert^2}$$
+$$|J(x)| = \sqrt{\sum_{i=1}^{n} \sum_{j=1}^{n} \left\lvert \cfrac{\partial F_i}{\partial x_j} \right\rvert^2}$$
+
+$|J(x)| = norm(J(x))$ sur la calculatrice
+
+$$ L := max_{x \in [a,b]} |J(x)|$$
 
 \formtitle{Avantage et inconvénient :}
 
@@ -175,11 +187,11 @@ $$||J(x)|| = \sqrt{\sum_{i=1}^{n} \sum_{j=1}^{n} \left\lvert \cfrac{\partial F_i
 
 \formtitle{Ordre de convergence :}
 
-$$||e_{k+1}|| \leq ||J(r)|| ||e_k||$$
+$$|e_{k+1}| \leq |J(r)| |e_k|$$
 
 Generalement linéaire
 
-Convertion quadratique si $||J(r)|| = 0$
+Convertion quadratique si $|J(r)| = 0$
 
 \formtitle{Méthode de Newton :}
 

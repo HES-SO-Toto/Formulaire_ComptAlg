@@ -1,3 +1,5 @@
+\hformbar{}
+
 \formdesc{Methode directe}
 
 \formtitle{Elimination de Gauss}
@@ -11,8 +13,21 @@
 
 \begin{enumerate}
     \item Transformer la matrice $A$ en forme echelonnee. $ A = LU $
+
+    {\hspace{-1cm}$
+    A = 
+    \begin{bmatrix}
+        u_{11} & u_{12} & u_{13} \\
+        l_{21}u_{11} & l_{21}u_{12} + u_{22} & l_{21}u_{13} + u_{23} \\
+        l_{31}u_{11} & l_{31}u_{12} + u_{32}l_{32} & l_{13}u_{13} + l_{32}u_{23} + u_{33} \\
+    \end{bmatrix}$}
     \item Substituer en avant $ L\vec{y} = \vec{b} $. avec L la matrice triangulaire inferieure.
+    
+    $\vec{y} = L^{-1} \vec{b}$
+
     \item Substituer en arriere $ U\vec{x} = \vec{y} $. avec U la matrice triangulaire superieure.
+    
+    $\vec{x} = U^{-1} \vec{y}$
 \end{enumerate}
 
 voir slide 9.
